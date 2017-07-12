@@ -1,0 +1,37 @@
+- name: Ensure docker kibana directories exist
+  become: yes
+  file:
+    state: directory
+    path: "{{ item }}"
+  with_items:
+    - "{{ docker_kibana_conf_dir }}"
+    - "{{ docker_kibana_data_dir }}"
+
+- name: Copy docker kibana configuration settings
+  copy:
+    src: "{{ docker_kibana_source_conf_dir }}"
+    dest: "{{ docker_kibana_conf_dir }}"
+    mode: 0644
+
+- name: Restart docker kibana container
+  become: yes
+  shell: "docker restart {{ docker_kibana_name }}"
+  tags:
+    - restart
+
+- name: Run docker kibana container
+  docker:
+    env: "{{ docker_kibana_env }}"
+    expose: "{{ docker_kibana_expose }}"
+    hostname: "{{ docker_kibana_hostname }}"
+    links: "{{ docker_kibana_links }}"
+    image: "{{ docker_kibana_image }}"
+    log_driver: "{{ docker_kibana_log_driver }}"
+    memory_limit: "{{ docker_kibana_memory_limit }}"
+    name: "{{ docker_kibana_name }}"
+    net: "{{ docker_kibana_net }}"
+    ports: "{{ docker_kibana_ports }}"
+    pull: always
+    restart_policy: always
+    state: reloaded
+    volumes: "{{ docker_kibana_volumes }}"

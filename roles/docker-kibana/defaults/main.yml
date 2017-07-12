@@ -1,0 +1,16 @@
+docker_kibana_name: kibana_1
+docker_kibana_image: docker.elastic.co/kibana/kibana:latest
+docker_kibana_source_conf_dir: conf/
+docker_kibana_conf_dir: /opt/kibana/conf/
+docker_kibana_env:
+  ELASTICSEARCH_URL: http://"{{ hostname_name }}"
+docker_kibana_hostname: "{{ hostname_name }}"
+docker_kibana_net: bridge
+docker_kibana_expose:
+  - 5601
+docker_kibana_ports:
+  - 5601:5601
+docker_kibana_volumes:
+  - "{{ docker_kibana_conf_dir }}:/usr/share/kibana/config"
+docker_kibana_memory_limit: 512MB
+docker_kibana_log_driver: syslog

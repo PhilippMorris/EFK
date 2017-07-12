@@ -1,0 +1,7 @@
+- name: Set up EFK
+  hosts: 127.0.0.1
+  connection: local
+  roles:
+    - docker-elasticsearch
+    - docker-fluentd
+    - docker-kibana
