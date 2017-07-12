@@ -21,7 +21,6 @@
     env: "{{ docker_kibana_env }}"
     expose: "{{ docker_kibana_expose }}"
     hostname: "{{ docker_kibana_hostname }}"
-    links: "{{ docker_kibana_links }}"
     image: "{{ docker_kibana_image }}"
     log_driver: "{{ docker_kibana_log_driver }}"
     memory_limit: "{{ docker_kibana_memory_limit }}"
