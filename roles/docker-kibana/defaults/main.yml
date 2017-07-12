@@ -1,5 +1,5 @@
 docker_kibana_name: kibana_1
-docker_kibana_image: docker.elastic.co/kibana/kibana:latest
+docker_kibana_image: docker.elastic.co/kibana/kibana:5.5.0
 docker_kibana_source_conf_dir: conf/
 docker_kibana_conf_dir: /opt/kibana/conf/
 docker_kibana_env:
