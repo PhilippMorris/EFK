@@ -5,7 +5,6 @@
     path: "{{ item }}"
   with_items:
     - "{{ docker_kibana_conf_dir }}"
-    - "{{ docker_kibana_data_dir }}"
 
 - name: Copy docker kibana configuration settings
   copy:
