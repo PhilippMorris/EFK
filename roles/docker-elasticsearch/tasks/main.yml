@@ -13,9 +13,9 @@
     dest: "{{ docker_elasticsearch_conf_dir }}"
     mode: 0644
 
-- name: Restart docker elasticsearch container
-  become: yes
-  shell: "docker restart {{ docker_elasticsearch_name }}"
+#- name: Restart docker elasticsearch container
+#  become: yes
+#  shell: "docker restart {{ docker_elasticsearch_name }}"
 
 - name: Run docker elasticsearch container
   docker:

@@ -13,11 +13,9 @@
     dest: "{{ docker_fluentd_conf_dir }}"
     mode: 0644
 
-- name: Restart docker fluentd container
-  become: yes
-  shell: "docker restart {{ docker_fluentd_name }}"
-  tags:
-    - restart
+#- name: Restart docker fluentd container
+#  become: yes
+#  shell: "docker restart {{ docker_fluentd_name }}"
 
 - name: Run docker fluentd container
   docker:

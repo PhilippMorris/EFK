@@ -13,11 +13,9 @@
     dest: "{{ docker_kibana_conf_dir }}"
     mode: 0644
 
-- name: Restart docker kibana container
-  become: yes
-  shell: "docker restart {{ docker_kibana_name }}"
-  tags:
-    - restart
+#- name: Restart docker kibana container
+#  become: yes
+#  shell: "docker restart {{ docker_kibana_name }}"
 
 - name: Run docker kibana container
   docker:
