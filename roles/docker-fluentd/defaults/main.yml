@@ -1,6 +1,6 @@
 docker_fluentd_name: fluentd_1
 docker_fluentd_image: fluent/fluentd:latest
-docker_fluentd_hostname: "{{ hostname_name }}"
+docker_fluentd_hostname: "{{ ansible_nodename }}"
 docker_fluentd_net: bridge
 docker_fluentd_source_conf_dir: etc/
 docker_fluentd_conf_dir: /opt/fluentd/conf/
