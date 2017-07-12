@@ -13,7 +13,9 @@ docker_elasticsearch_net: bridge
 docker_elasticsearch_expose:
   - 9200
   - 9300
-docker_elasticsearch_ports: []
+docker_elasticsearch_ports:
+  - 9200:9200
+  - 9300:9300
 docker_elasticsearch_volumes:
   - "{{ docker_elasticsearch_conf_dir }}:/usr/share/elasticsearch/config"
   - "{{ docker_elasticsearch_data_dir }}:/usr/share/elasticsearch/data"
