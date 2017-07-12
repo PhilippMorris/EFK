@@ -31,3 +31,4 @@
     restart_policy: always
     state: reloaded
     volumes: "{{ docker_kibana_volumes }}"
+    log_opt: "{{ docker_kibana_log_opt }}"

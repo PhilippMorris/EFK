@@ -2,8 +2,9 @@ docker_kibana_name: kibana_1
 docker_kibana_image: docker.elastic.co/kibana/kibana:5.5.0
 docker_kibana_source_conf_dir: conf/
 docker_kibana_conf_dir: /opt/kibana/conf/
+elasticsearch_url: http://localhost:9200
 docker_kibana_env:
-  ELASTICSEARCH_URL: http://"{{ ansible_nodename }}"
+  ELASTICSEARCH_URL: "{{ elasticsearch_url }}"
 docker_kibana_hostname: "{{ ansible_nodename }}"
 docker_kibana_net: bridge
 docker_kibana_expose:
@@ -13,4 +14,7 @@ docker_kibana_ports:
 docker_kibana_volumes:
   - "{{ docker_kibana_conf_dir }}:/usr/share/kibana/config"
 docker_kibana_memory_limit: 512MB
-docker_kibana_log_driver: journald
+docker_kibana_log_driver: []
+docker_kibana_log_opt:
+  syslog-facility: local0
+  tag: "{{ docker_kibana_name }}"

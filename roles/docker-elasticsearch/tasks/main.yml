@@ -12,6 +12,11 @@
     src: "{{ docker_elasticsearch_source_conf_dir }}"
     dest: "{{ docker_elasticsearch_conf_dir }}"
     mode: 0644
+    
+- sysctl:
+    name: vm.max_map_count
+    value: 262144
+    state: present
 
 #- name: Restart docker elasticsearch container
 #  become: yes
@@ -30,3 +35,4 @@
     restart_policy: always
     state: reloaded
     volumes: "{{ docker_elasticsearch_volumes }}"
+    ulimits:65536:65536
