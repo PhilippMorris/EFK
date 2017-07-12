@@ -13,7 +13,8 @@
     dest: "{{ docker_elasticsearch_conf_dir }}"
     mode: 0644
     
-- sysctl:
+- name: Change vm.max_map_count to 262144
+  sysctl:
     name: vm.max_map_count
     value: 262144
     state: present
