@@ -4,7 +4,7 @@ docker_elasticsearch_source_conf_dir: conf/
 docker_elasticsearch_conf_dir: /opt/elasticsearch/conf/
 docker_elasticsearch_data_dir: /opt/elasticsearch/data/
 docker_elasticsearch_env:
-  ES_HEAP_SIZE: "{{ (ansible_memtotal_mb / 2) | int }}m"
+  ES_JAVA_OPTS: "-Xms989m -Xmx989m"
   transport.host: 127.0.0.1
   http.host: 0.0.0.0
   bootstrap_memory_lock: true

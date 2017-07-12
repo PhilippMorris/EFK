@@ -13,4 +13,4 @@ docker_kibana_ports:
 docker_kibana_volumes:
   - "{{ docker_kibana_conf_dir }}:/usr/share/kibana/config"
 docker_kibana_memory_limit: 512MB
-docker_kibana_log_driver: syslog
+docker_kibana_log_driver: journald
