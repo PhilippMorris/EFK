@@ -35,5 +35,5 @@
     pull: always
     restart_policy: always
     state: reloaded
-    ulimits: 65536:65536
+    ulimits: nofile:65536:65536
     volumes: "{{ docker_elasticsearch_volumes }}"
