@@ -8,7 +8,7 @@ docker_elasticsearch_env:
   transport.host: 127.0.0.1
   http.host: 0.0.0.0
   bootstrap_memory_lock: true
-docker_elasticsearch_hostname: "{{ hostname_name }}"
+docker_elasticsearch_hostname: "{{ ansible_nodename }}"
 docker_elasticsearch_net: bridge
 docker_elasticsearch_expose:
   - 9200
