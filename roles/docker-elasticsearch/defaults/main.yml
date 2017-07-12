@@ -8,6 +8,7 @@ docker_elasticsearch_env:
   xpack.security.enabled: false
   xpack.monitoring.enabled: false
   XPACK_MONITORING_ENABLED: false
+  Dlog4j2.disable.jmx: true
   transport.host: 127.0.0.1
   http.host: 0.0.0.0
   bootstrap_memory_lock: true
