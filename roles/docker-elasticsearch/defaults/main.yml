@@ -1,5 +1,5 @@
 docker_elasticsearch_name: elasticsearch_1
-docker_elasticsearch_image: docker.elastic.co/elasticsearch/elasticsearch:5.5
+docker_elasticsearch_image: docker.elastic.co/elasticsearch/elasticsearch:5.5.0
 docker_elasticsearch_source_conf_dir: conf/
 docker_elasticsearch_conf_dir: /opt/elasticsearch/conf/
 docker_elasticsearch_data_dir: /opt/elasticsearch/data/
