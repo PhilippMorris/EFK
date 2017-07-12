@@ -5,6 +5,9 @@ docker_elasticsearch_conf_dir: /opt/elasticsearch/conf/
 docker_elasticsearch_data_dir: /opt/elasticsearch/data/
 docker_elasticsearch_env:
   ES_JAVA_OPTS: "-Xms989m -Xmx989m"
+  xpack.security.enabled: false
+  xpack.monitoring.enabled: false
+  XPACK_MONITORING_ENABLED: false
   transport.host: 127.0.0.1
   http.host: 0.0.0.0
   bootstrap_memory_lock: true
