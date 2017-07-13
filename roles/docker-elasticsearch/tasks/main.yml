@@ -33,7 +33,8 @@
     net: "{{ docker_elasticsearch_net }}"
     ports: "{{ docker_elasticsearch_ports }}"
     pull: always
-    restart_policy: always
+    restart_policy: on-failure
     state: reloaded
     ulimits: nofile:65536:65536
     volumes: "{{ docker_elasticsearch_volumes }}"
+    memory_limit: "{{ docker_elasticsearch_memory_limit }}"

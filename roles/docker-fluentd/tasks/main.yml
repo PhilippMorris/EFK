@@ -31,3 +31,4 @@
     restart_policy: always
     state: reloaded
     volumes: "{{ docker_fluentd_volumes }}"
+    memory_limit: "{{ docker_fluentd_memory_limit }}"

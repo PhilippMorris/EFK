@@ -20,3 +20,4 @@ docker_elasticsearch_ports:
 docker_elasticsearch_volumes:
   - "{{ docker_elasticsearch_conf_dir }}:/usr/share/elasticsearch/config"
   - "{{ docker_elasticsearch_data_dir }}:/usr/share/elasticsearch/data"
+docker_elasticsearch_memory_limit: 2GB
