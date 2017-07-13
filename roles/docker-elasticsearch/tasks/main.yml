@@ -32,7 +32,7 @@
     name: "{{ docker_elasticsearch_name }}"
     net: "{{ docker_elasticsearch_net }}"
     ports: "{{ docker_elasticsearch_ports }}"
-    pull: always
+    pull: missing
     restart_policy: on-failure
     state: reloaded
     ulimits: nofile:65536:65536
