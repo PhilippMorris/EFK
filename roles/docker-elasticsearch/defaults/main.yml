@@ -1,10 +1,11 @@
 docker_elasticsearch_name: elasticsearch_1
-docker_elasticsearch_image: docker.elastic.co/elasticsearch/elasticsearch:5.5.0
+docker_elasticsearch_image: my-es-image
+#docker_elasticsearch_image: docker.elastic.co/elasticsearch/elasticsearch:5.5.0
 docker_elasticsearch_source_conf_dir: conf/
 docker_elasticsearch_conf_dir: /opt/elasticsearch/conf/
 docker_elasticsearch_data_dir: /opt/elasticsearch/data/
 docker_elasticsearch_env:
-  ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+  ES_JAVA_OPTS: "-Xms2G -Xmx2G"
   Dlog4j2.disable.jmx: true
   transport.host: 127.0.0.1
   http.host: 0.0.0.0
