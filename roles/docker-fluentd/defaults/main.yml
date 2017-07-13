@@ -15,4 +15,4 @@ docker_fluentd_ports:
 docker_fluentd_volumes:
   - "{{ docker_fluentd_data_dir }}:/data"
   - "{{ docker_fluentd_conf_dir }}:/etc/fluent:ro"
-docker_fluentd_memory_limit: 100MB
+docker_fluentd_memory_limit: 0
