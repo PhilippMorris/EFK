@@ -3,12 +3,9 @@ es.logger.level: INFO
 rootLogger: ${es.logger.level}, console
 logger:
   # log action execution errors for easier debugging
-  action: INFO
+  action: DEBUG
   # reduce the logging for aws, too much is logged under the default INFO
   com.amazonaws: WARN
-
-  index.search.slowlog: TRACE
-  index.indexing.slowlog: TRACE
 
 appender:
   console:
