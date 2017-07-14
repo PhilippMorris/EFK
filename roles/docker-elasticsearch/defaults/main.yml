@@ -1,24 +1,41 @@
-docker_elasticsearch_name: elasticsearch_1
-docker_elasticsearch_image: my-es-image
+# vars file for docker-systemd
+---
+container_description: "{{ container_name }} in Docker container"
+container_pull: true
+container_cmd: ""
+container_service_name: "{{ container_name }}.service"
+full_image: "{{ container_image }}:{{ tag }}"
+container_ports: []
+container_volumes: []
+container_extra_options: []
+env_variables: []
+container_image: ""
+tag: ""
+path: ""
+container_name: ""
+#container_name: elasticsearch
+#docker_elasticsearch_image: my-es-image
 #docker_elasticsearch_image: docker.elastic.co/elasticsearch/elasticsearch:5.5.0
-docker_elasticsearch_source_conf_dir: conf/
-docker_elasticsearch_conf_dir: /opt/elasticsearch/conf/
-docker_elasticsearch_data_dir: /opt/elasticsearch/data/
-docker_elasticsearch_env:
-  ES_JAVA_OPTS: "-Xms2G -Xmx2G"
-  Dlog4j2.disable.jmx: true
-  transport.host: 127.0.0.1
-  http.host: 0.0.0.0
-  bootstrap_memory_lock: true
-docker_elasticsearch_hostname: "{{ ansible_nodename }}"
-docker_elasticsearch_net: bridge
-docker_elasticsearch_expose:
-  - 9200
-  - 9300
-docker_elasticsearch_ports:
-  - 9200:9200
-  - 9300:9300
-docker_elasticsearch_volumes:
-  - "{{ docker_elasticsearch_conf_dir }}:/usr/share/elasticsearch/config"
-  - "{{ docker_elasticsearch_data_dir }}:/usr/share/elasticsearch/data"
-docker_elasticsearch_memory_limit: 0
+container_source_conf_dir: conf/
+container_conf_dir: /opt/elasticsearch/conf/
+container_data_dir: /opt/elasticsearch/data/
+container_scripts_dir: /opt/elasticsearch/conf/scripts
+#container_env:
+#  "ES_JAVA_OPTS: -Xms2G -Xmx2G"
+#  Dlog4j2.disable.jmx: true
+#  transport.host: 127.0.0.1
+#  http.host: 0.0.0.0
+#  bootstrap_memory_lock: true
+#container_hostname: "{{ ansible_nodename }}"
+#container_net: bridge
+#container_expose:
+#  - 9200
+#  - 9300
+#container_ports:
+#  - 9200:9200
+#  - 9300:9300
+#container_volumes:
+#  - "{{ container_conf_dir }}:/usr/share/elasticsearch/config"
+#  - "{{ container_data_dir }}:/usr/share/elasticsearch/data"
+#container_memory_limit: 0 
+

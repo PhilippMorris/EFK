@@ -1,40 +1,48 @@
 - name: Ensure docker elasticsearch directories exist
-  become: yes
   file:
     state: directory
     path: "{{ item }}"
   with_items:
-    - "{{ docker_elasticsearch_conf_dir }}"
-    - "{{ docker_elasticsearch_data_dir }}"
+    - "{{ container_conf_dir }}"
+    - "{{ container_data_dir }}"
+    - "{{ container_scripts_dir }}"
 
 - name: Copy docker elasticsearch configuration settings
   copy:
-    src: "{{ docker_elasticsearch_source_conf_dir }}"
-    dest: "{{ docker_elasticsearch_conf_dir }}"
+    src: "{{ container_source_conf_dir }}"
+    dest: "{{ container_conf_dir }}"
     mode: 0644
     
-- name: Change vm.max_map_count to 262144
-  sysctl:
-    name: vm.max_map_count
-    value: 262144
-    state: present
+#- name: Change vm.max_map_count to 262144
+#  sysctl:
+#    name: vm.max_map_count
+#    value: 262144
+#    state: present
 
-#- name: Restart docker elasticsearch container
-#  become: yes
-#  shell: "docker restart {{ docker_elasticsearch_name }}"
+- name: Deploy elasticsearch container
+  include_role:
+    name: docker-systemd
+  vars:
+    container_image: "docker.elastic.co/elasticsearch/elasticsearch"
+    tag: "5.5.0"
+    container_name: elasticsearch
+    container_extra_options: ["--net bridge" "--sysctl vm.max_map_count=262144" "--ulimit nofile:65536:65536"]
+    container_volumes: ["{{ container_conf_dir }}:/usr/share/elasticsearch/config" "{{ container_data_dir }}:/usr/share/elasticsearch/data" ]
+    container_ports: ["9200:9200" "9300:9300"]
+    env_variables: ["ES_JAVA_OPTS=-Xms2G -Xmx2G" "Dlog4j2.disable.jmx=true" "transport.host=127.0.0.1" "http.host=0.0.0.0" "bootstrap_memory_lock=true"]
 
-- name: Run docker elasticsearch container
-  docker:
-    env: "{{ docker_elasticsearch_env }}"
-    expose: "{{ docker_elasticsearch_expose }}"
-    hostname: "{{ docker_elasticsearch_hostname }}"
-    image: "{{ docker_elasticsearch_image }}"
-    name: "{{ docker_elasticsearch_name }}"
-    net: "{{ docker_elasticsearch_net }}"
-    ports: "{{ docker_elasticsearch_ports }}"
-    pull: missing
-    restart_policy: on-failure
-    state: reloaded
-    ulimits: nofile:65536:65536
-    volumes: "{{ docker_elasticsearch_volumes }}"
-    memory_limit: "{{ docker_elasticsearch_memory_limit }}"
+#- name: Run docker elasticsearch container
+#  docker:
+#    env: "{{ docker_elasticsearch_env }}"
+#    expose: "{{ docker_elasticsearch_expose }}"
+#    hostname: "{{ docker_elasticsearch_hostname }}"
+#    image: "{{ docker_elasticsearch_image }}"
+#    name: "{{ docker_elasticsearch_name }}"
+#    net: "{{ docker_elasticsearch_net }}"
+#    ports: "{{ docker_elasticsearch_ports }}"
+#    pull: missing
+#    restart_policy: on-failure
+#    state: reloaded
+#    ulimits: nofile:65536:65536
+#    volumes: "{{ docker_elasticsearch_volumes }}"
+#    memory_limit: "{{ docker_elasticsearch_memory_limit }}"

@@ -3,5 +3,5 @@
   connection: local
   roles:
     - docker-elasticsearch
-    - docker-fluentd
-    - docker-kibana
+#    - docker-fluentd
+#    - docker-kibana
