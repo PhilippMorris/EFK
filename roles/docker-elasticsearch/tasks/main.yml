@@ -28,7 +28,7 @@
     container_name: elasticsearch
     container_extra_options: 
      - --net bridge 
-     - --sysctl vm.max_map_count=262144 
+     - --sysctl -w vm.max_map_count=262144 
      - "--ulimit nofile:65536:65536"
     container_volumes: 
      - "{{ container_conf_dir }}:/usr/share/elasticsearch/config"
