@@ -20,7 +20,7 @@
     tag: "latest"
     container_name: fluentd
     container_extra_options: 
-     - --net bridge 
+     - --net host 
     container_volumes: 
      - "{{ container_conf_dir }}:/etc/fluent:ro"
      - "{{ container_data_dir }}:/data"

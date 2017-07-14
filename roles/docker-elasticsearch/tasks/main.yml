@@ -22,7 +22,7 @@
     tag: "2.4.5"
     container_name: elasticsearch
     container_extra_options: 
-     - --net bridge 
+     - --net host 
      - "--ulimit nofile=65536:65536"
     container_volumes: 
      - "{{ container_conf_dir }}:/usr/share/elasticsearch/config"

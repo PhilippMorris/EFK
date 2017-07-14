@@ -20,7 +20,7 @@
     tag: "5.5.0"
     container_name: kibana
     container_extra_options: 
-     - --net bridge
+     - --net host
      - --log-driver syslog
      - --log-opt syslog-facility=local0
     container_volumes: 
