@@ -26,7 +26,7 @@
     container_image: "docker.elastic.co/elasticsearch/elasticsearch"
     tag: "5.5.0"
     container_name: elasticsearch
-    container_extra_options: {--net bridge --sysctl vm.max_map_count=262144 "--ulimit nofile:65536:65536"}
+    container_extra_options: --net bridge, --sysctl vm.max_map_count=262144, --ulimit nofile{{:}}65536{{:}}65536
     container_volumes: "{{ container_conf_dir }}:/usr/share/elasticsearch/config" "{{ container_data_dir }}:/usr/share/elasticsearch/data"
     container_ports: "9200:9200" "9300:9300"
     env_variables: "ES_JAVA_OPTS=-Xms2G -Xmx2G" "Dlog4j2.disable.jmx=true" "transport.host=127.0.0.1" "http.host=0.0.0.0" "bootstrap_memory_lock=true"
