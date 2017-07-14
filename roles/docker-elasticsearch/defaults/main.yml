@@ -10,6 +10,7 @@ container_volumes: []
 container_extra_options: []
 env_variables: []
 container_image: ""
+dockerhub: true
 tag: ""
 path: ""
 container_name: ""
