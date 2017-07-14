@@ -23,7 +23,8 @@
   include_role:
     name: docker-systemd
   vars:
-    container_image: "docker.elastic.co/elasticsearch/elasticsearch"
+#    container_image: "docker.elastic.co/elasticsearch/elasticsearch"
+    container_image: "library/elasticsearch"
     tag: "2.4.5"
     container_name: elasticsearch
     container_extra_options: 
