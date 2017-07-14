@@ -37,7 +37,7 @@
      - "9200:9200"
      - "9300:9300"
     env_variables: 
-     - '"ES_JAVA_OPTS=-Xms2G -Xmx2G"''
+     - '"ES_JAVA_OPTS=-Xms2G -Xmx2G"'
      - Dlog4j2.disable.jmx=true 
      - transport.host=127.0.0.1 
      - http.host=0.0.0.0 
