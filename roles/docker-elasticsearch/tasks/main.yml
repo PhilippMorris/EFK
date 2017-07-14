@@ -13,12 +13,6 @@
     dest: "{{ container_conf_dir }}"
     mode: 0644
     
-#- name: Change vm.max_map_count to 262144
-#  sysctl:
-#    name: vm.max_map_count
-#    value: 262144
-#    state: present
-
 - name: Deploy elasticsearch container
   include_role:
     name: docker-systemd
@@ -29,7 +23,6 @@
     container_name: elasticsearch
     container_extra_options: 
      - --net bridge 
-#     - --sysctl -w vm.max_map_count=262144 
      - "--ulimit nofile=65536:65536"
     container_volumes: 
      - "{{ container_conf_dir }}:/usr/share/elasticsearch/config"
@@ -43,19 +36,3 @@
      - transport.host=127.0.0.1 
      - http.host=0.0.0.0 
      - bootstrap_memory_lock=true
-
-#- name: Run docker elasticsearch container
-#  docker:
-#    env: "{{ docker_elasticsearch_env }}"
-#    expose: "{{ docker_elasticsearch_expose }}"
-#    hostname: "{{ docker_elasticsearch_hostname }}"
-#    image: "{{ docker_elasticsearch_image }}"
-#    name: "{{ docker_elasticsearch_name }}"
-#    net: "{{ docker_elasticsearch_net }}"
-#    ports: "{{ docker_elasticsearch_ports }}"
-#    pull: missing
-#    restart_policy: on-failure
-#    state: reloaded
-#    ulimits: nofile:65536:65536
-#    volumes: "{{ docker_elasticsearch_volumes }}"
-#    memory_limit: "{{ docker_elasticsearch_memory_limit }}"

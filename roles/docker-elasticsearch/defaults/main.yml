@@ -14,29 +14,7 @@ dockerhub: true
 tag: ""
 path: ""
 container_name: ""
-#container_name: elasticsearch
-#docker_elasticsearch_image: my-es-image
-#docker_elasticsearch_image: docker.elastic.co/elasticsearch/elasticsearch:5.5.0
 container_source_conf_dir: conf/
 container_conf_dir: /opt/elasticsearch/conf/
 container_data_dir: /opt/elasticsearch/data/
 container_scripts_dir: /opt/elasticsearch/conf/scripts
-#container_env:
-#  "ES_JAVA_OPTS: -Xms2G -Xmx2G"
-#  Dlog4j2.disable.jmx: true
-#  transport.host: 127.0.0.1
-#  http.host: 0.0.0.0
-#  bootstrap_memory_lock: true
-#container_hostname: "{{ ansible_nodename }}"
-#container_net: bridge
-#container_expose:
-#  - 9200
-#  - 9300
-#container_ports:
-#  - 9200:9200
-#  - 9300:9300
-#container_volumes:
-#  - "{{ container_conf_dir }}:/usr/share/elasticsearch/config"
-#  - "{{ container_data_dir }}:/usr/share/elasticsearch/data"
-#container_memory_limit: 0 
-

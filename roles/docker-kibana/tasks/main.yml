@@ -4,31 +4,29 @@
     state: directory
     path: "{{ item }}"
   with_items:
-    - "{{ docker_kibana_conf_dir }}"
+    - "{{ container_conf_dir }}"
 
 - name: Copy docker kibana configuration settings
   copy:
-    src: "{{ docker_kibana_source_conf_dir }}"
-    dest: "{{ docker_kibana_conf_dir }}"
+    src: "{{ container_source_conf_dir }}"
+    dest: "{{ container_conf_dir }}"
     mode: 0644
 
-#- name: Restart docker kibana container
-#  become: yes
-#  shell: "docker restart {{ docker_kibana_name }}"
-
-- name: Run docker kibana container
-  docker:
-    env: "{{ docker_kibana_env }}"
-    expose: "{{ docker_kibana_expose }}"
-    hostname: "{{ docker_kibana_hostname }}"
-    image: "{{ docker_kibana_image }}"
-    log_driver: "{{ docker_kibana_log_driver }}"
-    memory_limit: "{{ docker_kibana_memory_limit }}"
-    name: "{{ docker_kibana_name }}"
-    net: "{{ docker_kibana_net }}"
-    ports: "{{ docker_kibana_ports }}"
-    pull: always
-    restart_policy: always
-    state: reloaded
-    volumes: "{{ docker_kibana_volumes }}"
-    log_opt: "{{ docker_kibana_log_opt }}"
+- name: Deploy kibana container
+  include_role:
+    name: docker-systemd
+  vars:
+    container_image: "docker.elastic.co/kibana/kibana"
+    tag: "5.5.0"
+    container_name: kibana
+    container_extra_options: 
+     - --net bridge
+     - --log-driver syslog
+     - --log-opt syslog-facility=local0
+    container_volumes: 
+     - "{{ container_conf_dir }}:/usr/share/kibana/config"
+    container_ports: 
+     - "5601:5601"
+    env_variables:
+     - "ELASTICSEARCH_URL=http://localhost:9200"
+     - "SERVER_NAME=localhost"
