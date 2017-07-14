@@ -16,8 +16,9 @@
   include_role:
     name: docker-systemd
   vars:
-    container_image: "docker.elastic.co/kibana/kibana"
-    tag: "5.5.0"
+#    container_image: "docker.elastic.co/kibana/kibana"
+    container_image: "library/kibana"
+    tag: "4.6.4"
     container_name: kibana
     container_extra_options: 
      - --net host
