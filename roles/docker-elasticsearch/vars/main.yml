@@ -14,8 +14,9 @@ elasticsearch_container_volumes:
  - "{{ elasticsearch_conf_dir }}:/usr/share/elasticsearch/config"
  - "{{ elasticsearch_data_dir }}:/usr/share/elasticsearch/data"
 elasticsearch_container_extra_options: 
- - --net host 
+ - --net host
  - "--ulimit nofile=65536:65536"
+ - -u=elasticsearch
 elasticsearch_env_variables:
  - '"ES_JAVA_OPTS=-Xms2G -Xmx2G"'
  - Dlog4j2.disable.jmx=true 
