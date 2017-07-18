@@ -170,9 +170,8 @@ cluster.name: ${HOSTNAME}-cluster
 #
 #path.plugins: /path/to/plugins
 
-path:
-  logs: /var/log/elasticsearch
-  data: /var/data/elasticsearch
+#path:
+#  data: /var/data/elasticsearch
 #################################### Plugin ###################################
 
 # If a plugin listed here is not installed for current node, the node will not start.
