@@ -1,4 +1,7 @@
-network.host: 0.0.0.0
+network.host: _site_
+node.name: ${HOSTNAME}
+cluster.name: ${HOSTNAME}-cluster
+
 ##################### Elasticsearch Configuration Example #####################
 
 # This file contains an overview of various configuration settings,
@@ -167,7 +170,9 @@ network.host: 0.0.0.0
 #
 #path.plugins: /path/to/plugins
 
-
+path:
+  logs: /var/log/elasticsearch
+  data: /var/data/elasticsearch
 #################################### Plugin ###################################
 
 # If a plugin listed here is not installed for current node, the node will not start.

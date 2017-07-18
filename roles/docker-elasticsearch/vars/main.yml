@@ -13,7 +13,7 @@ elasticsearch_container_ports:
 elasticsearch_container_volumes:
  - "{{ elasticsearch_config }}:/usr/share/elasticsearch/config/elasticsearch.yml"
  - "{{ elasticsearch_log_conf }}:/usr/share/elasticsearch/config/logging.yml"
- - "{{ elasticsearch_data_dir }}:/usr/share/elasticsearch/data"
+ - "{{ elasticsearch_data_dir }}:/var/data/elasticsearch"
 elasticsearch_container_extra_options: 
  - --net host
  - "--ulimit nofile=65536:65536"
@@ -22,6 +22,8 @@ elasticsearch_env_variables:
  - transport.host=127.0.0.1 
  - http.host=0.0.0.0 
  - bootstrap_memory_lock=true
+ - xpack.security.enabled=false
+ - xpack.monitoring.enabled=false
 elasticsearch_source_conf_dir: conf/
 elasticsearch_conf_dir: /opt/elasticsearch/conf/
 elasticsearch_config: /opt/elasticsearch/conf/elasticsearch.yml
