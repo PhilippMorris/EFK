@@ -1,6 +1,7 @@
 ---
 # vars file for fluentd
 
+fluentd_container_name: "Fluentd"
 fluentd_container_description: "Fluentd in Docker container"
 fluentd_container_cmd: ""
 fluentd_version: "latest"

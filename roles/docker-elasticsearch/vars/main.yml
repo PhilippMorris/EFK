@@ -1,6 +1,7 @@
 ---
 # vars file for Elasticsearch
 
+elasticsearch_container_name: "Elasticsearch"
 elasticsearch_container_description: "Elasticsearch in Docker container"
 elasticsearch_container_cmd: ""
 elasticsearch_version: 5.5.0

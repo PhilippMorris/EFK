@@ -1,6 +1,7 @@
 ---
 # vars file for kibana
 
+kibana_container_name: "Kibana"
 kibana_container_description: "Kibana in Docker container"
 kibana_container_cmd: ""
 kibana_version: 5.5.0
