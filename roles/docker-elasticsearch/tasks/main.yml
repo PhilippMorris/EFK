@@ -5,7 +5,6 @@
   with_items:
     - "{{ elasticsearch_conf_dir }}"
     - "{{ elasticsearch_data_dir }}"
-    - "{{ elasticsearch_scripts_dir }}"
 
 - name: Copy docker elasticsearch configuration settings
   copy:

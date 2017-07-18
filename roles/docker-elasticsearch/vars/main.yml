@@ -11,19 +11,18 @@ elasticsearch_container_ports:
  - "9200:9200"
  - "9300:9300"
 elasticsearch_container_volumes:
- - "{{ elasticsearch_conf_dir }}:/usr/share/elasticsearch/config"
+ - "{{ elasticsearch_conf }}:/usr/share/elasticsearch/config/elasticsearch.yml"
+ - "{{ elasticsearch_log_conf }}:/usr/share/elasticsearch/config/logging.yml"
  - "{{ elasticsearch_data_dir }}:/usr/share/elasticsearch/data"
 elasticsearch_container_extra_options: 
  - --net host
  - "--ulimit nofile=65536:65536"
  - -u=elasticsearch
 elasticsearch_env_variables:
- - '"ES_JAVA_OPTS=-Xms2G -Xmx2G"'
- - Dlog4j2.disable.jmx=true 
  - transport.host=127.0.0.1 
  - http.host=0.0.0.0 
  - bootstrap_memory_lock=true
 elasticsearch_source_conf_dir: conf/
-elasticsearch_conf_dir: /opt/elasticsearch/conf/
+elasticsearch_conf: /opt/elasticsearch/conf/elasticsearch.yml
+elasticsearch_log_conf: /opt/elasticsearch/conf/logging.yml
 elasticsearch_data_dir: /opt/elasticsearch/data/
-elasticsearch_scripts_dir: /opt/elasticsearch/conf/scripts
