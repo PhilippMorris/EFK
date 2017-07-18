@@ -11,7 +11,7 @@ kibana_container_ports:
  - "5601:5601"
 kibana_container_volumes:
  - "{{ kibana_conf_dir }}:/usr/share/kibana/config"
-kibana_extra_options: 
+kibana_container_extra_options: 
  - --net host
  - --log-driver syslog
  - --log-opt syslog-facility=local0

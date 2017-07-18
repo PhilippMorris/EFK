@@ -13,7 +13,7 @@ elasticsearch_container_ports:
 elasticsearch_container_volumes:
  - "{{ elasticsearch_conf_dir }}:/usr/share/elasticsearch/config"
  - "{{ elasticsearch_data_dir }}:/usr/share/elasticsearch/data"
-elasticsearch_extra_options: 
+elasticsearch_container_extra_options: 
  - --net host 
  - "--ulimit nofile=65536:65536"
 elasticsearch_env_variables:

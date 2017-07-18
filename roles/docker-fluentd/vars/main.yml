@@ -13,7 +13,7 @@ fluentd_container_ports:
 fluentd_container_volumes:
  - "{{ fluentd_conf_dir }}:/etc/fluent:ro"
  - "{{ fluentd_data_dir }}:/data"
-fluentd_extra_options: 
+fluentd_container_extra_options: 
  - --net host 
 fluentd_env_variables: []
 fluentd_source_conf_dir: conf/
