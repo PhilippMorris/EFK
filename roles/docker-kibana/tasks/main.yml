@@ -10,7 +10,7 @@
     src: "{{ kibana_source_conf_dir }}"
     dest: "{{ kibana_conf_dir }}"
     mode: 0644
-    notify: restart kibana
+  notify: restart kibana
 
 - name: create kibana service file
   template:
