@@ -1,0 +1,21 @@
+---
+# vars file for kibana
+
+kibana_container_description: "Kibana in Docker container"
+kibana_container_cmd: ""
+kibana_version: 5.5.0
+kibana_container_image: "docker.elastic.co/kibana/kibana"
+kibana_full_image: "{{ kibana_container_image }}:{{ kibana_version }}"
+kibana_container_ports:
+ - "5601:5601"
+kibana_container_volumes:
+ - "{{ kibana_conf_dir }}:/usr/share/kibana/config"
+kibana_extra_options: 
+ - --net host
+ - --log-driver syslog
+ - --log-opt syslog-facility=local0
+kibana_env_variables:
+ - "ELASTICSEARCH_URL=http://localhost:9200"
+ - "SERVER_NAME=localhost"
+kibana_source_conf_dir: conf/
+kibana_conf_dir: /opt/kibana/conf/

@@ -1,0 +1,20 @@
+---
+# vars file for fluentd
+
+fluentd_container_description: "Fluentd in Docker container"
+fluentd_container_cmd: ""
+fluentd_version: "latest"
+fluentd_container_image: "fluent/fluentd"
+fluentd_full_image: "{{ fluentd_container_image }}:{{ fluentd_version }}"
+fluentd_container_ports:
+  - "24224:24224"
+  - "24224:24224/udp"
+fluentd_container_volumes:
+ - "{{ fluentd_conf_dir }}:/etc/fluent:ro"
+ - "{{ fluentd_data_dir }}:/data"
+fluentd_extra_options: 
+ - --net host 
+fluentd_env_variables: []
+fluentd_source_conf_dir: conf/
+fluentd_conf_dir: /opt/fluentd/conf/
+fluentd_data_dir: /opt/fluentd/data/

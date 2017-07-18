@@ -3,27 +3,18 @@
     state: directory
     path: "{{ item }}"
   with_items:
-    - "{{ container_conf_dir }}"
-    - "{{ container_data_dir }}"
+    - "{{ fluentd_conf_dir }}"
+    - "{{ fluentd_data_dir }}"
 
 - name: Copy docker fluentd configuration settings
   copy:
-    src: "{{ container_source_conf_dir }}"
-    dest: "{{ container_conf_dir }}"
+    src: "{{ fluentd_source_conf_dir }}"
+    dest: "{{ fluentd_conf_dir }}"
     mode: 0644
-
-- name: Deploy fluentd container
-  include_role:
-    name: docker-systemd
-  vars:
-    container_image: "fluent/fluentd"
-    tag: "latest"
-    container_name: fluentd
-    container_extra_options: 
-     - --net host 
-    container_volumes: 
-     - "{{ container_conf_dir }}:/etc/fluent:ro"
-     - "{{ container_data_dir }}:/data"
-    container_ports: 
-     - "24224:24224"
-     - "24224:24224/udp"
+  notify: restart fluentd
+    
+- name: create fluentd service file
+  template:
+    src: "templates/fluentd.service.j2"
+    dest: "/etc/systemd/system/fluentd.service"
+  notify: restart fluentd

@@ -1,0 +1,32 @@
+[Unit]
+Description={{ kibana_container_description }}
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/bin/docker stop {{ kibana_container_name }}
+ExecStartPre=-/usr/bin/docker rm {{ kibana_container_name }}
+ExecStartPre=-/usr/bin/docker pull {{ kibana_full_image }}
+ExecStart=/usr/bin/docker run --rm -t \
+{% for port in kibana_container_ports %}
+    -p {{ port }} \
+{% endfor %}
+{% for env in kibana_env_variables %}
+    -e {{ env }} \
+{% endfor %}
+{% for volume in kibana_container_volumes %}
+    -v {{ volume }} \
+{% endfor %}
+{% for option in kibana_container_extra_options %}
+    {{ option }} \
+{% endfor %}
+    --name {{ kibana_container_name }} {{ kibana_full_image }} {{ kibana_container_cmd }}
+ExecStop=-/usr/bin/docker stop -t 3 {{ kibana_container_name }}
+ExecStop=-/usr/bin/docker rm {{ kibana_container_name }}
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

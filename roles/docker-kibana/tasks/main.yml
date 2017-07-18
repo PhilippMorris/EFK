@@ -1,33 +1,19 @@
 - name: Ensure docker kibana directories exist
-  become: yes
   file:
     state: directory
     path: "{{ item }}"
   with_items:
-    - "{{ container_conf_dir }}"
+    - "{{ kibana_conf_dir }}"
 
 - name: Copy docker kibana configuration settings
   copy:
-    src: "{{ container_source_conf_dir }}"
-    dest: "{{ container_conf_dir }}"
+    src: "{{ kibana_source_conf_dir }}"
+    dest: "{{ kibana_conf_dir }}"
     mode: 0644
+    notify: restart kibana
 
-- name: Deploy kibana container
-  include_role:
-    name: docker-systemd
-  vars:
-#    container_image: "docker.elastic.co/kibana/kibana"
-    container_image: "library/kibana"
-    tag: "4.6.4"
-    container_name: kibana
-    container_extra_options: 
-     - --net host
-     - --log-driver syslog
-     - --log-opt syslog-facility=local0
-    container_volumes: 
-     - "{{ container_conf_dir }}:/usr/share/kibana/config"
-    container_ports: 
-     - "5601:5601"
-    env_variables:
-     - "ELASTICSEARCH_URL=http://localhost:9200"
-     - "SERVER_NAME=localhost"
+- name: create kibana service file
+  template:
+    src: "templates/kibana.service.j2"
+    dest: "/etc/systemd/system/kibana.service"
+  notify: restart kibana

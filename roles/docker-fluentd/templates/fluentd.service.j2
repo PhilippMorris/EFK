@@ -1,0 +1,32 @@
+[Unit]
+Description={{ fluentd_container_description }}
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/bin/docker stop {{ fluentd_container_name }}
+ExecStartPre=-/usr/bin/docker rm {{ fluentd_container_name }}
+ExecStartPre=-/usr/bin/docker pull {{ fluentd_full_image }}
+ExecStart=/usr/bin/docker run --rm -t \
+{% for port in fluentd_container_ports %}
+    -p {{ port }} \
+{% endfor %}
+{% for env in fluentd_env_variables %}
+    -e {{ env }} \
+{% endfor %}
+{% for volume in fluentd_container_volumes %}
+    -v {{ volume }} \
+{% endfor %}
+{% for option in fluentd_container_extra_options %}
+    {{ option }} \
+{% endfor %}
+    --name {{ fluentd_container_name }} {{ fluentd_full_image }} {{ fluentd_container_cmd }}
+ExecStop=-/usr/bin/docker stop -t 3 {{ fluentd_container_name }}
+ExecStop=-/usr/bin/docker rm {{ fluentd_container_name }}
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

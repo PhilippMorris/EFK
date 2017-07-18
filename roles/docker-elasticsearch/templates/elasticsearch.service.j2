@@ -1,0 +1,32 @@
+[Unit]
+Description={{ elasticsearch_container_description }}
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/bin/docker stop {{ elasticsearch_container_name }}
+ExecStartPre=-/usr/bin/docker rm {{ elasticsearch_container_name }}
+ExecStartPre=-/usr/bin/docker pull {{ elasticsearch_full_image }}
+ExecStart=/usr/bin/docker run --rm -t \
+{% for port in elasticsearch_container_ports %}
+    -p {{ port }} \
+{% endfor %}
+{% for env in elasticsearch_env_variables %}
+    -e {{ env }} \
+{% endfor %}
+{% for volume in elasticsearch_container_volumes %}
+    -v {{ volume }} \
+{% endfor %}
+{% for option in elasticsearch_container_extra_options %}
+    {{ option }} \
+{% endfor %}
+    --name {{ elasticsearch_container_name }} {{ elasticsearch_full_image }} {{ elasticsearch_container_cmd }}
+ExecStop=-/usr/bin/docker stop -t 3 {{ elasticsearch_container_name }}
+ExecStop=-/usr/bin/docker rm {{ elasticsearch_container_name }}
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

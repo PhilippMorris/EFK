@@ -3,36 +3,19 @@
     state: directory
     path: "{{ item }}"
   with_items:
-    - "{{ container_conf_dir }}"
-    - "{{ container_data_dir }}"
-    - "{{ container_scripts_dir }}"
+    - "{{ elasticsearch_conf_dir }}"
+    - "{{ elasticsearch_data_dir }}"
+    - "{{ elasticsearch_scripts_dir }}"
 
 - name: Copy docker elasticsearch configuration settings
   copy:
-    src: "{{ container_source_conf_dir }}"
-    dest: "{{ container_conf_dir }}"
+    src: "{{ elasticsearch_source_conf_dir }}"
+    dest: "{{ elasticsearch_conf_dir }}"
     mode: 0644
-    
-- name: Deploy elasticsearch container
-  include_role:
-    name: docker-systemd
-  vars:
-#    container_image: "docker.elastic.co/elasticsearch/elasticsearch"
-    container_image: "library/elasticsearch"
-    tag: "2.4.5"
-    container_name: elasticsearch
-    container_extra_options: 
-     - --net host 
-     - "--ulimit nofile=65536:65536"
-    container_volumes: 
-     - "{{ container_conf_dir }}:/usr/share/elasticsearch/config"
-     - "{{ container_data_dir }}:/usr/share/elasticsearch/data"
-    container_ports: 
-     - "9200:9200"
-     - "9300:9300"
-    env_variables: 
-     - '"ES_JAVA_OPTS=-Xms2G -Xmx2G"'
-     - Dlog4j2.disable.jmx=true 
-     - transport.host=127.0.0.1 
-     - http.host=0.0.0.0 
-     - bootstrap_memory_lock=true
+  notify: restart elasticsearch
+        
+- name: create elasticsearch service file
+  template:
+    src: "templates/elasticsearch.service.j2"
+    dest: "/etc/systemd/system/elasticsearch.service"
+  notify: restart elasticsearch
